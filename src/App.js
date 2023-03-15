@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { Routes, Route } from "react-router-dom";
+import "./App.css";
+import Header from "./Component/Header";
+import NotFound from "./Component/NotFound";
+import Regist from "./Page/Regist";
+import SignInSide from "./Page/Signin";
+import Container from "@mui/material/Container";
+import CssBaseline from "@mui/material/CssBaseline";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Blog from "./Page/Main";
 function App() {
+  const sections = [
+    { title: "일기", url: "#" },
+    { title: "노래추천", url: "#" },
+    { title: "독후감", url: "#" },
+    { title: "코딩공부", url: "#" },
+    { title: "맛집추천", url: "#" },
+  ];
+  const theme = createTheme();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Container maxWidth="lg">
+          <Header sections={sections} />
+          <Routes>
+            <Route path="/signup" element={<Regist />}></Route>
+            <Route path="/signin" element={<SignInSide />}></Route>
+            <Route path="/blog" element={<Blog />}></Route>
+            <Route path="*" element={<NotFound />}></Route>
+          </Routes>
+        </Container>
+      </ThemeProvider>
     </div>
   );
 }
