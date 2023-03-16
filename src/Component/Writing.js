@@ -18,6 +18,10 @@ const Write = memo(({ quillRef, api, htmlContent, setHtmlContent }) => {
       const file = input.files[0];
       formData.append("image", file); // 위에서 만든 폼데이터에 이미지 추가
 
+     
+        console.log(file);
+    
+
       // 폼데이터를 서버에 넘겨 multer로 이미지 URL 받아오기
       const res = await api.uploadImage(formData);
       if (!res.success) {
@@ -81,7 +85,7 @@ const Write = memo(({ quillRef, api, htmlContent, setHtmlContent }) => {
         modules={modules}
         placeholder="내용을 입력하세요."
         theme="snow"
-        style={{height:500}}
+        style={{ height: 500 }}
       />
     </div>
   );
