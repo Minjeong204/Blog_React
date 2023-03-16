@@ -8,6 +8,8 @@ import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Blog from "./Page/Main";
+import Write from "./Component/Writing";
+import Writing from "./Page/Write";
 function App() {
   const sections = [
     { title: "일기", url: "#" },
@@ -27,6 +29,7 @@ function App() {
             <Route path="/signup" element={<Regist />}></Route>
             <Route path="/signin" element={<SignInSide />}></Route>
             <Route path="/blog" element={<Blog />}></Route>
+            <Route path="/write" element={<Writing />}></Route>
             <Route path="*" element={<NotFound />}></Route>
           </Routes>
         </Container>

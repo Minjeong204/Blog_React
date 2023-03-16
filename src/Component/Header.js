@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
+import SearchIcon from "@mui/icons-material/Person";
+import Create from "@mui/icons-material/Create";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 
@@ -28,16 +29,24 @@ function Header(props) {
   return (
     <Fragment>
       <Toolbar sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Button size="small">Subscribe</Button>
+        {isLogin ? (
+          <p>
+            <Create />
+            <Link to="/write">글쓰기</Link>
+          </p>
+        ) : (
+          <p></p>
+        )}
+
         <Typography
           component="h2"
           variant="h5"
           color="inherit"
           align="center"
-          noWrap
+          nowrap="true"
           sx={{ flex: 1 }}
         >
-          BLOG
+          <Link to="/blog">BLOG</Link>
         </Typography>
         <IconButton>
           <SearchIcon />
@@ -62,7 +71,7 @@ function Header(props) {
         {sections.map((section) => (
           <Link
             color="inherit"
-            noWrap
+            nowrap="true"
             key={section.title}
             variant="body2"
             href={section.url}
@@ -79,11 +88,9 @@ function Header(props) {
 Header.propTypes = {
   sections: PropTypes.arrayOf(
     PropTypes.shape({
-      title: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
     })
   ).isRequired,
-  title: PropTypes.string.isRequired,
 };
 
 export default Header;
