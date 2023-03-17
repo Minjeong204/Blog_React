@@ -24,7 +24,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Container maxWidth="lg">
-          <Header sections={sections} />
+          <Header sections={sections}/>
           <Routes>
             <Route path="/signup" element={<Regist />}></Route>
             <Route path="/signin" element={<SignInSide />}></Route>

@@ -21,7 +21,7 @@ function Header(props) {
       setIsLogin(true);
       console.log("isLogin ?? :: ", isLogin);
     }
-  });
+  }, []);
   const logout = () => {
     sessionStorage.clear();
     window.location.reload();
