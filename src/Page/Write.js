@@ -44,6 +44,7 @@ const Writing = memo(({ api }) => {
                 {
                     title: title,
                     content: content.ops[0].insert,
+                    category: category,
                     useYn: useYn,
                     regiUser: regi,
                 },
@@ -98,8 +99,11 @@ const Writing = memo(({ api }) => {
                             value={category}
                             label="category"
                             onChange={handleCategory}>
-                            <MenuItem value={"여행"}>여행</MenuItem>
-                            <MenuItem value={"코딩"}>코딩</MenuItem>
+                            <MenuItem value={"diary"}>일기</MenuItem>
+                            <MenuItem value={"song"}>노래추천</MenuItem>
+                            <MenuItem value={"book"}>독후감</MenuItem>
+                            <MenuItem value={"study"}>코딩 공부</MenuItem>
+                            <MenuItem value={"deli"}>맛집 추천</MenuItem>
                         </Select>
                     </FormControl>
                 </AccordionDetails>

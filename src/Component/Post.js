@@ -5,7 +5,7 @@ import Divider from "@mui/material/Divider";
 import { v4 as uuidv4 } from "uuid";
 import { Box } from "@mui/system";
 
-function Main(props) {
+function Post(props) {
     const { posts, title } = props;
     const arr = [{ post: "", title: "" }];
     console.log(posts[0]);
@@ -19,7 +19,7 @@ function Main(props) {
             item
             height={1000}
             xs={12}
-            md={8}
+            md={12}
             sx={{
                 "& .markdown": {
                     py: 3,
@@ -46,9 +46,9 @@ function Main(props) {
     );
 }
 
-Main.propTypes = {
+Post.propTypes = {
     posts: PropTypes.arrayOf(PropTypes.string).isRequired,
     title: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default Main;
+export default Post;
