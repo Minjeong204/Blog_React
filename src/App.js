@@ -10,6 +10,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Blog from "./Page/Main";
 import Writing from "./Page/Write";
 import Detail from "./Page/Deatail";
+import Modify from "./Page/Modify";
 function App() {
     const sections = [
         { title: "diary", url: "/blog/diary" },
@@ -31,6 +32,7 @@ function App() {
                         <Route path="/blog" element={<Blog />}></Route>
                         <Route path="/blog/:category" element={<Detail />}></Route>
                         <Route path="/write" element={<Writing />}></Route>
+                        <Route path="/modify/:id" element={<Modify />}></Route>
                         <Route path="*" element={<NotFound />}></Route>
                     </Routes>
                 </Container>

@@ -1,41 +1,35 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import MainFeaturedPost from "../Component/MainFeaturedPost";
-import FeaturedPost from "../Component/FeaturedPost";
-import Main from "../Component/Content";
 import { request } from "../Axios";
-import Sidebar from "../Component/Sidebar";
 import { useParams } from "react-router-dom";
 import Post from "../Component/Post";
 
 export default function Detail() {
-    const [posts, setPost] = useState([]);
-    const [title, setTitle] = useState([]);
-
     const { category } = useParams();
-
+    const [posts, setPosts] = useState(null);
     useEffect(() => {
         request
             .get(`/blog/${category}`)
-            .then(function (response) {
-                const post = [];
-                const titles = [];
-                response.data.map((p) => post.push(p.content));
-                response.data.map((p) => titles.push(p.title));
-                setTitle(titles);
-                setPost(post);
+            .then((response) => {
+                const newPosts = response.data.map((post) => ({
+                    id: post.postId,
+                    title: post.title,
+                    content: post.content,
+                }));
+                setPosts(newPosts);
             })
-            .catch(function (error) {
+            .catch((error) => {
                 console.error(error);
             });
-    }, []);
+    }, [category]);
+
     return (
         <main>
             <Grid container spacing={5} sx={{ mt: 3 }} md={12} item>
-                <Post title={title} posts={posts} />
+                {posts &&
+                    posts.map((post) => {
+                        return <Post key={post.title} post={post} id={post.id} />;
+                    })}
             </Grid>
         </main>
     );

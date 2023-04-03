@@ -1,4 +1,4 @@
-import React, { useRef, memo } from "react";
+import React, { useRef, memo, useEffect } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { request } from "../Axios";
@@ -12,8 +12,34 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useParams } from "react-router-dom";
 
-const Writing = memo(({ api }) => {
+const Modify = memo(({ api }) => {
+    const { id } = useParams();
+    const [posts, setPosts] = React.useState([]);
+    useEffect(() => {
+        request
+            .post(
+                "/find",
+                { postId: id },
+                {
+                    headers: { "Content-Type": `application/json` },
+                }
+            )
+            .then((response) => {
+                setPosts({
+                    id: response.data.postId,
+                    title: response.data.title,
+                    content: response.data.content,
+                });
+                setTitle(response.data.title);
+                setCategory(response.data.category);
+                setValues(response.data.useYn);
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    }, [id]);
     const [title, setTitle] = React.useState("");
     const [useYn, setValues] = React.useState("");
     const [category, setCategory] = React.useState("");
@@ -41,20 +67,14 @@ const Writing = memo(({ api }) => {
         console.log(regi);
         request
             .post(
-                "/regipost",
-                {
-                    title: title,
-                    content: descriptions,
-                    category: category,
-                    useYn: useYn,
-                    regiUser: regi,
-                },
+                "/modify",
+                { postId: id, title: title, content: descriptions, category: category, useYn: useYn, regiUser: regi },
                 {
                     headers: { "Content-Type": `application/json` },
                 }
             )
             .then(function () {
-                alert("등록 성공");
+                alert("수정 성공");
                 document.location.href = "/blog";
             })
             .catch(function (error) {
@@ -66,7 +86,7 @@ const Writing = memo(({ api }) => {
             <div style={{ marginBottom: 30, marginTop: 30 }}>
                 <TextField
                     fullWidth
-                    value={title || ""}
+                    value={title}
                     id="standard-multiline-flexible"
                     label="title"
                     name="title"
@@ -74,7 +94,7 @@ const Writing = memo(({ api }) => {
                     onChange={handleTitle}
                 />
             </div>
-            <QuillEditor quillRef={quillRef} api={api} />
+            <QuillEditor quillRef={quillRef} api={api} htmlContent={posts.content} />
             <Accordion>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
                     <Typography>공개여부 및 카테고리</Typography>
@@ -116,4 +136,4 @@ const Writing = memo(({ api }) => {
         </div>
     );
 });
-export default Writing;
+export default Modify;

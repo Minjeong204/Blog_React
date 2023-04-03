@@ -57,29 +57,39 @@ const sidebar = {
 };
 
 export default function Blog() {
-    const [posts, setPost] = useState([]);
-    const [title, setTitle] = useState([]);
+    const [posts, setPosts] = useState(null);
     useEffect(() => {
         request
             .get("/main")
-            .then(function (response) {
-                setPost([response.data[0].content, response.data[1].content]);
-                setTitle([response.data[0].title, response.data[1].title]);
+            .then((response) => {
+                const newPosts = response.data.map((post) => ({
+                    id: post.postId,
+                    title: post.title,
+                    content: post.content,
+                }));
+                setPosts(newPosts);
+                console.log(response.data);
             })
             .catch(function (error) {
                 console.error(error);
             });
     }, []);
+    console.log(posts);
     return (
         <main>
             <MainFeaturedPost post={mainFeaturedPost} />
             <Grid container spacing={4}>
-                {featuredPosts.map((post) => (
-                    <FeaturedPost key={post.title} post={post} />
+                {featuredPosts.map((p) => (
+                    <FeaturedPost key={p.title} post={p} />
                 ))}
             </Grid>
             <Grid container spacing={5} sx={{ mt: 3 }}>
-                <Main title={title} posts={posts} />
+                <Grid item height={420} xs={8} md={8}>
+                    {posts &&
+                        posts.map((post) => {
+                            return post.id && <Main key={post.id} post={post} />;
+                        })}
+                </Grid>
                 <Sidebar
                     title={sidebar.title}
                     description={sidebar.description}
