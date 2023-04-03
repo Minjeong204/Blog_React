@@ -8,6 +8,7 @@ import FeaturedPost from "../Component/FeaturedPost";
 import Main from "../Component/Content";
 import { request } from "../Axios";
 import Sidebar from "../Component/Sidebar";
+import Footer from "../Component/Footer";
 
 const mainFeaturedPost = {
     title: "Hello World",

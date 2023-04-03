@@ -11,6 +11,8 @@ import Blog from "./Page/Main";
 import Writing from "./Page/Write";
 import Detail from "./Page/Deatail";
 import Modify from "./Page/Modify";
+import Footer from "./Component/Footer";
+
 function App() {
     const sections = [
         { title: "diary", url: "/blog/diary" },
@@ -36,6 +38,7 @@ function App() {
                         <Route path="*" element={<NotFound />}></Route>
                     </Routes>
                 </Container>
+                <Footer title="Footer" description="Something here to give the footer a purpose!" />
             </ThemeProvider>
         </div>
     );
