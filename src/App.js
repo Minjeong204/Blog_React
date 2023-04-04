@@ -9,7 +9,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Blog from "./Page/Main";
 import Writing from "./Page/Write";
-import Detail from "./Page/Deatail";
+import Detail from "./Page/Detail";
 import Modify from "./Page/Modify";
 import Footer from "./Component/Footer";
 
