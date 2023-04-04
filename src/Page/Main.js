@@ -9,7 +9,6 @@ import Main from "../Component/Content";
 import { request } from "../Axios";
 import Sidebar from "../Component/Sidebar";
 
-
 const mainFeaturedPost = {
     title: "Hello World",
     description: "I LIKE COOKIES",
@@ -68,8 +67,7 @@ export default function Blog() {
                     title: post.title,
                     content: post.content,
                 }));
-                setPosts(newPosts);
-                console.log(response.data);
+                setPosts(newPosts.slice(0, 2));
             })
             .catch(function (error) {
                 console.error(error);
@@ -85,7 +83,7 @@ export default function Blog() {
                 ))}
             </Grid>
             <Grid container spacing={5} sx={{ mt: 3 }}>
-                <Grid item height={420} xs={8} md={8}>
+                <Grid item xs={8} md={8}>
                     {posts &&
                         posts.map((post) => {
                             return post.id && <Main key={post.id} post={post} />;
