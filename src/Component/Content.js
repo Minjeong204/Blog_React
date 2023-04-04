@@ -10,7 +10,7 @@ function Main(props) {
     return (
         <Box
             sx={{
-                height: 400,
+                height:250,
                 border: "1px solid #cccccc",
                 paddingLeft: 5,
                 paddingRight: 5,

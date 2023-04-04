@@ -74,7 +74,7 @@ const Writing = memo(({ api }) => {
                     onChange={handleTitle}
                 />
             </div>
-            <QuillEditor quillRef={quillRef} api={api} />
+            <QuillEditor quillRef={quillRef} api={api}/>
             <Accordion>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
                     <Typography>공개여부 및 카테고리</Typography>
