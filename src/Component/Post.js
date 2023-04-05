@@ -22,24 +22,27 @@ export default function Post(props) {
     };
 
     const delete2 = () => {
-        request
-            .post(
-                "/delete",
-                {
-                    postId: id,
-                },
-                {
-                    headers: { "Content-Type": `application/json` },
-                }
-            )
-            .then(function (response) {
-                alert("삭제 성공");
+        const prom = window.confirm("정말 삭제하시겠습니까?");
+        if (prom) {
+            request
+                .post(
+                    "/delete",
+                    {
+                        postId: id,
+                    },
+                    {
+                        headers: { "Content-Type": `application/json` },
+                    }
+                )
+                .then(function (response) {
+                    alert("삭제 성공");
 
-                window.location.href = "/blog";
-            })
-            .catch(function (error) {
-                console.error(error);
-            });
+                    window.location.href = "/blog";
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        }
     };
 
     return (
