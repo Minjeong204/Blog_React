@@ -1,8 +1,5 @@
 import * as React from "react";
-import PropTypes from "prop-types";
-import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
-import { v4 as uuidv4 } from "uuid";
 import { Box } from "@mui/system";
 
 function Main(props) {
